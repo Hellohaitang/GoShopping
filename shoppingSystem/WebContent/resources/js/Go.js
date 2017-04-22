@@ -33,8 +33,8 @@ window.onload = function () {
             var data = {
                 username: username,
                 password: password,
-                service :"userService",
-                method :"login"
+                service:  'userService',
+                method:   'login'
             }
             $.ajax({
                 url:      '/shoppingSystem/FrontController',
@@ -58,16 +58,16 @@ window.onload = function () {
                         alert("用户名不存在！");
                     }
                 },
-//                error: function(){
-//                     alert("请求失败，请稍后重试！");
-//                    $('body').removeClass('set_position');
-//                    $('#nav .sign').css('display','none');
-//                    $('#nav .sel').css('display','block');
-//                    $('#signBox').css('display','none');
-//                    $('#content .showPro').css('display', 'block');
-//                    var contentH = document.getElementById('content').offsetHeight;
-//                    $('#footer').css('margin-top', contentH);
-//                }
+                error: function(){
+                    // alert("请求失败，请稍后重试！");
+                    $('body').removeClass('set_position');
+                    $('#nav .sign').css('display','none');
+                    $('#nav .sel').css('display','block');
+                    $('#signBox').css('display','none');
+                    $('#content .showPro').css('display', 'block');
+                    var contentH = document.getElementById('content').offsetHeight;
+                    $('#footer').css('margin-top', contentH);
+                }
             })
         })
         //注册时点击“注册”按钮
@@ -92,11 +92,11 @@ window.onload = function () {
                         alert("该用户已存在！");
                     }
                 },
-//                error: function(){
-//                    // alert("请求失败，请稍后重试！");
-//                    alert("注册成功！\n欢迎使用Go物缘，快来愉快购物吧~");
-//                    $('.sign #signinbtn').click();
-//                }
+                error: function(){
+                    // alert("请求失败，请稍后重试！");
+                    alert("注册成功！\n欢迎使用Go物缘，快来愉快购物吧~");
+                    $('.sign #signinbtn').click();
+                }
             })
         })
         //搜索商品

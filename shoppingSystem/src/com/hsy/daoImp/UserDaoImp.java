@@ -11,12 +11,6 @@ import com.hsy.utils.Singleton;
 
 public class UserDaoImp implements UserDao{
 
-	public User updateUser(User entity){
-		String updateSql="update user set where name=?,";
-		return null;
-	}
-	
-	
 	@Override
 	public boolean insert(User entity) {
 		boolean flag=false;
@@ -61,12 +55,4 @@ public class UserDaoImp implements UserDao{
 		User user=DaoHandel.executeQueryForSingle(selectSql, parameters,User.class);
 		return user;
 	}
-	
-	public static void main(String[] args) {
-		
-		UserDaoImp userDaoImp=BeanFactory.getInstance(UserDaoImp.class);
-		User user=new User(1,"aa","123456", "123456", new Date());
-		userDaoImp.insert(user);
-	}
-
 }

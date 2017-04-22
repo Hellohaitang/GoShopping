@@ -221,8 +221,21 @@ body{
 	margin: 0;
 	padding: 50px 0 10px 20px;
 	color: #8E32F8;
-	font-size: 20px;
 	border-bottom: 2px solid #8E32F8;
+}
+#content .pro_item .title{
+	font-size: 20px;
+}
+#content .pro_item a.more{
+	color: #8E32F8;
+	text-align: right;
+	text-decoration: none;
+	display: inline-block;
+	float: right;
+	margin-right: 40px;
+}
+#content .pro_item a.more:hover{
+	color: red;
 }
 #content .pro_item .images{
 	width: 100%;
@@ -236,7 +249,10 @@ body{
 	float: left;
 	margin: 10px 10px;
 	border: 1px solid #FAFAFA;
-	cursor: pointer;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 0 0 5px #8E32F8;
+	font-family:"Comic Sans MS","微软雅黑","幼圆","黑体",sans-serif;
 }
 #content .pro:hover{
 	border: 1px solid #8E32F8;
@@ -244,7 +260,27 @@ body{
 #content .classified img{
 	width: 230px;
 	height: 220px;
-	margin: 10px 6px;
+	margin: 10px 8px;
+	cursor: pointer;
+	border: 1px solid #FAFAFA;
+}
+#content .pro .description{
+	margin: 0;
+	padding: 10px 20px;
+	color: black;
+	text-align: center;
+	cursor: pointer;
+}
+#content .pro .description:hover{
+	color: #8E32F8;
+	text-decoration: underline;
+}
+#content .pro .price{
+	margin: 0;
+	padding: 10px;
+	text-align: center;
+	color: #8E32F8;
+	font-size: 1.2em;
 }
 .clear{
 	clear: both;

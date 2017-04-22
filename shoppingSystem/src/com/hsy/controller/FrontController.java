@@ -24,7 +24,7 @@ public class FrontController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String data;
-		data=ServiceHandel.ServiceHandel(request, response);
+		data=ServiceHandel.ServiceHandel(request, response);   
 		PageHandel.goToPage(request, response,data);
 	}
 	

@@ -10,13 +10,16 @@ import java.io.Serializable;
 public class ShoppingCart implements Serializable{
 
 	private int ShoppingCartId;
-	private int userId;
+	private int userId;    
 	private int commodityId;
-	public ShoppingCart(int shoppingCartId, int userId, int commodityId) {
+	private int number;
+
+	public ShoppingCart(int shoppingCartId, int userId, int commodityId,int number) {
 		super();
 		ShoppingCartId = shoppingCartId;
 		this.userId = userId;
 		this.commodityId = commodityId;
+		this.number=number;
 	}
 	
 	public ShoppingCart(){
@@ -45,5 +48,13 @@ public class ShoppingCart implements Serializable{
 
 	public void setCommodityId(int commodityId) {
 		this.commodityId = commodityId;
+	}
+	
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 }

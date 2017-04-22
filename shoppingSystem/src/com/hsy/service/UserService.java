@@ -9,11 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import com.hsy.base.BaseService;
 import com.hsy.beanFactory.BeanFactory;
+import com.hsy.dao.UserDao;
 import com.hsy.daoImp.UserDaoImp;
 import com.hsy.entity.User;
 
 import net.sf.json.JSONObject;
-import net.sf.json.JSONString;
 
 /**
  * 操作user的事务
@@ -23,18 +23,7 @@ import net.sf.json.JSONString;
  */
 public class UserService implements BaseService{
 
-	private UserDaoImp userDao =BeanFactory.getInstance(UserDaoImp.class); 
-	
-	public String updateUser(HttpServletRequest request,HttpServletResponse response){
-		
-		//从前端取到数据
-	/**
-	 * 
-	 */
-		User user=new User();
-		User user2=userDao.updateUser(user);
-		return JSONObject.fromObject(user2).toString();
-	}
+	private UserDao userDao =BeanFactory.getInstance(UserDaoImp.class); 
 	
 	/**
 	 * 验证用户
@@ -45,32 +34,25 @@ public class UserService implements BaseService{
 	public String login(HttpServletRequest request,HttpServletResponse response) {
 		
 		//获取前端传过来的数据
-		String dataReq=request.getParameter("data");
-		JSONObject jsonObject=JSONObject.fromObject(dataReq);
-		String name =jsonObject.getString("username");
-		String password =jsonObject.getString("password");
-//		User user = userDao.login(name);
-//		String dataRes=null;
-//		// 该用户不存在
-//		if (null == user) {
-//			dataRes="用户名错误";
-//		}
-//		// 该用户存在并且输入的密码不正确
-//		if (!user.getPassword().equals(password)) {
-//			dataRes="密码错误";
-//		}
-//		//如果用户输入的用户名和密码都正确，将用户名存进session
-//		HttpSession session=request.getSession();
-//		session.setAttribute("username",name);
-//		return dataRes;
+		String name =request.getParameter("username");
+		String password =request.getParameter("password");
 		
-		String dataRes="登录失败";
-		if(name.equals("aaa")&&password.equals("aaa")){
-			dataRes="登录成功";
+		User user = userDao.login(name);
+		String dataRes=null;
+		// 该用户不存在
+		if (null == user) {
+			dataRes="0";
+			return dataRes;
 		}
-		//如果用户输入的用户名和密码都正确，将用户名存进session
+		// 该用户存在并且输入的密码不正确
+	    if (!user.getPassword().equals(password)) {
+			dataRes="1";
+			return dataRes;
+		}
+		//如果用户输入的用户名和密码都正确，将用户存进session
 		HttpSession session=request.getSession();
-		session.setAttribute("username",name);
+		session.setAttribute("username",user);
+		dataRes="2";
 		return dataRes;
 	}
 	/**
@@ -80,13 +62,25 @@ public class UserService implements BaseService{
 	 * @return
 	 */
 	public String register(HttpServletRequest request,HttpServletResponse response){
-//		String data=request.getParameter("data");
-//		JSONObject jsonObject=JSONObject.fromObject(data);
-//		jsonObject.put("userId",0);
-//		User user=(User) JSONObject.toBean(jsonObject,User.class);
-//		Boolean flag=userDao.insert(user);
-//		return flag.toString();
-		Boolean flag=true;
-		return flag.toString();
+		
+		//从前端获取数据
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		String phone=request.getParameter("phone");
+		//先根据用户名查找该用户名是否存在
+		User user = userDao.login(username);
+		//该用户已存在
+		if(user!=null)
+			return "0";
+		
+	    user=new User(0, username, phone, password, new Date());
+		Boolean flag=userDao.insert(user);
+		String dataRes=(flag==true)?"1":"0";
+		return dataRes;
 	}
+	
+//	public static void main(String[] args) {
+//		UserService service=new UserService();
+//		System.out.println(service.register(null, null));
+//	}
 }

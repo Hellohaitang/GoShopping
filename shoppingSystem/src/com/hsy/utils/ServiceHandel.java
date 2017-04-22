@@ -2,6 +2,7 @@ package com.hsy.utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,10 +37,8 @@ public class ServiceHandel {
 	 */
 	public static String ServiceHandel(HttpServletRequest request, HttpServletResponse response) {
 		
-		String dataReq=request.getParameter("data");
-		JSONObject jsonObject=JSONObject.fromObject(dataReq);
-		String methodName = jsonObject.getString("method");
-		String serviceName=jsonObject.getString("service");
+		String methodName=request.getParameter("method");
+		String serviceName=request.getParameter("service");
 		BaseService baseService =getService(serviceName);
 		Class<? extends BaseService> clazz = baseService.getClass();
 		String dataRes=null;
