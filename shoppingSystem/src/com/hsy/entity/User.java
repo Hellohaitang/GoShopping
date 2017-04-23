@@ -13,18 +13,16 @@ public class User implements Serializable{
 	private String name;
 	private String phone;
 	private String password;
-	private Date createTime;
 	
 	public User(){
 		
 	}
-	public User(int userId, String name, String phone, String password, Date createTime) {
+	public User(int userId, String name, String phone, String password) {
 		super();
 		this.userId = userId;
 		this.name = name;
 		this.phone = phone;
 		this.password = password;
-		this.createTime = createTime;
 	}
 	public int getUserId() {
 		return userId;
@@ -50,16 +48,9 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", name=" + name + ", phone=" + phone + ", password=" + password
-				+ ", createTime=" + createTime + "]";
+		return "User [userId=" + userId + ", name=" + name + ", phone=" + phone + ", password=" + password + "]";
 	}
 	
 }

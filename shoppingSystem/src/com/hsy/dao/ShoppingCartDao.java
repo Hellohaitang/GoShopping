@@ -29,4 +29,20 @@ public interface ShoppingCartDao extends BaseDao<ShoppingCart>{
      * @return
      */
     int deleteShoppingCart(int userId,int commodityId);
+    
+    /**
+     * 通过用户id和商品的id查找是否存在购物车
+     * @param userId
+     * @param commodityId
+     * @return
+     */
+    ShoppingCart findShoppingCartByUserIdAndCommodityId(int userId,int commodityId);
+    
+    /**
+     * 根据购物车的id修改已加入购物车的商品的数量
+     * @param shoppingCartId
+     * @param number
+     * @return
+     */
+    int updateShoppingCart(int shoppingCartId,int number);
 }

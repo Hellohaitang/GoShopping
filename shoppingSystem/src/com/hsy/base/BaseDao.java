@@ -14,13 +14,13 @@ public interface BaseDao<T> {
 	 * 插入数据到表中
 	 * @param entity
 	 */
-	boolean insert(T entity);
+	int insert(T entity);
 	
 	/**
 	 * 根据id删除表中的记录
 	 * @param id
 	 */
-	boolean deleteById(Object id);
+	int deleteById(Object id);
 	
 	/**
 	 * 根据id查找表中的记录

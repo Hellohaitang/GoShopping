@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.hsy.dao.ShoppingCartDao;
 import com.hsy.entity.Commodity;
-import com.hsy.entity.Detail;
+import com.hsy.entity.OrderDetail;
 import com.hsy.entity.ShoppingCart;
 import com.hsy.utils.DaoHandel;
 import com.hsy.utils.Singleton;
@@ -12,10 +12,10 @@ import com.hsy.utils.Singleton;
 public class ShoppingCartDaoImp implements ShoppingCartDao {
 
 	@Override
-	public boolean insert(ShoppingCart entity) {
+	public int insert(ShoppingCart entity) {
 		String insertSql="insert into shopping_cart values(null,?,?,?)";
 		Object[] parameters=new Object[]{entity.getUserId(),entity.getCommodityId(),entity.getNumber()};
-		boolean flag=DaoHandel.executeDML(insertSql, parameters)>0?true:false;
+		int flag=DaoHandel.executeDML(insertSql, parameters);
 		return flag;
 	}
 	
@@ -27,7 +27,7 @@ public class ShoppingCartDaoImp implements ShoppingCartDao {
 	public List<ShoppingCart> selectByUserId(int userId){
 		String selectSql="select *from shopping_cart where user_id=?";
 		Object[] parameters=new Object[]{userId};
-		List list=DaoHandel.executeQueryForAll(selectSql, parameters,ShoppingCart.class);
+		List<ShoppingCart> list=DaoHandel.executeQueryForAll(selectSql, parameters,ShoppingCart.class);
 		return list;
 	}
 	
@@ -57,10 +57,27 @@ public class ShoppingCartDaoImp implements ShoppingCartDao {
 		return flag;
 	}
 	
+	/**
+     * 通过用户id和商品的id查找是否存在购物车
+     * @param userId
+     * @param commodityId
+     * @return
+     */
+	public ShoppingCart findShoppingCartByUserIdAndCommodityId(int userId, int commodityId) {
+		String selectSql="select *from shopping_cart where user_id=? and commodity_id=?";
+		Object[] parameters=new Object[]{userId,commodityId};
+		ShoppingCart shoppingCart=DaoHandel.executeQueryForSingle(selectSql, parameters,ShoppingCart.class);
+		return shoppingCart;
+	}
+	/**
+	 * 根据购物车的id删除购物车
+	 */
 	@Override
-	public boolean deleteById(Object id) {
-		// TODO Auto-generated method stub
-		return false;
+	public int deleteById(Object id) {
+		String deleteSql="delete from shopping_cart where shopping_cart_id=?";
+		Object[] parameters=new Object[]{id};
+		int flag=DaoHandel.executeDML(deleteSql, parameters);
+		return flag;
 	}
 	@Override
 	public ShoppingCart selectById(Object id) {
@@ -71,6 +88,20 @@ public class ShoppingCartDaoImp implements ShoppingCartDao {
 	public List<ShoppingCart> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+     * 根据购物车的id修改已加入购物车的商品的数量
+     * @param shoppingCartId
+     * @param number
+     * @return
+     */
+	@Override
+	public int updateShoppingCart(int shoppingCartId, int number) {
+		String updateSql="update shopping_cart set number=? where shopping_cart_id=?";
+		Object[] parameters=new Object[]{number,shoppingCartId};
+		int flag = DaoHandel.executeDML(updateSql, parameters);
+		return flag;
 	}
 
 }
