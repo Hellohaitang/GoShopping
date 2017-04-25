@@ -62,4 +62,15 @@ public class UserDaoImp implements UserDao{
 		User user=DaoHandel.executeQueryForSingle(selectSql, parameters,User.class);
 		return user;
 	}
+	
+	/**
+	 * 修改用户的信息
+	 */
+	@Override
+	public int updateUser(User user) {
+		String updateSql="update user set name=?,password=?,phone=? where user_id=?";
+		Object[] parameters=new Object[]{user.getName(),user.getPassword(),user.getPhone(),user.getUserId()};
+		int flag=DaoHandel.executeDML(updateSql, parameters);
+		return flag;
+	}
 }

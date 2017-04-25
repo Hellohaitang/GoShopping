@@ -11,4 +11,13 @@ public interface UserDao extends BaseDao<User>{
 	 * @return
 	 */
 	 User login(String name);
+	 
+	 /**
+	  * 修改用户的信息
+	  * @param username
+	  * @param password
+	  * @param phone
+	  * @return
+	  */
+	 int updateUser(User user);
 }
