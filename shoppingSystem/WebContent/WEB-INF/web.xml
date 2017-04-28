@@ -20,7 +20,7 @@
 		<filter-class>com.hsy.filter.SessionCheckFilter</filter-class>
 		<init-param>
 			<param-name>redirectURL</param-name>
-			<param-value>/Go.html</param-value>
+			<param-value>html/Gwy_home.html</param-value>
 		</init-param>
 	</filter>
 	<!-- 配置EncodingFilter过滤器拦截的url -->
@@ -35,6 +35,8 @@
 	</filter-mapping>
 	
 	<welcome-file-list>
+		<welcome-file>html/Gwy_home.html</welcome-file>
 		<welcome-file>/html/Gwy_home.html</welcome-file>
+		<welcome-file>../html/Gwy_home.html</welcome-file>
 	</welcome-file-list>
 </web-app>

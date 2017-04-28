@@ -59,8 +59,16 @@ public class CommodityDaoImp implements CommodityDao {
 	 */
 	@Override
 	public List<Commodity> getAllCommodityByWord(String word) {
-		String selectSql=Dictionary.match(word);
+		String selectSql=Dictionary.matchBoth(word);
+		if(selectSql==null){
+			return null;
+		}
 		List<Commodity> list=DaoHandel.executeQueryForAll(selectSql,null,Commodity.class);
+		//如果查询不到信息则采取另外一种策略
+		if(list==null){
+			selectSql=Dictionary.match(word);
+		}
+		list=DaoHandel.executeQueryForAll(selectSql,null,Commodity.class);
 		return list;
 	}
 

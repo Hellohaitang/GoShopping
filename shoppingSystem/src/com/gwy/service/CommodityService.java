@@ -45,6 +45,9 @@ public class CommodityService implements BaseService {
 		String word=request.getParameter("word");
 		// 得到所有的商品信息
 		List<Commodity> list = commodityDao.getAllCommodityByWord(word);
+		if(list==null){
+			return "0";
+		}
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		return jsonArray.toString();
 	}

@@ -38,7 +38,7 @@ public class SessionCheckFilter implements Filter {
 		String uri = url.substring(contextPath.length(), url.length());
 		// 如果请求不是是来自登录页面和注册页面
 		String method=httpRequest.getParameter("method");
-		
+		System.out.println(uri);
 		if (method != null && !method.equals("login") && !method.equals("register")){
 
 			// 如果用户请求的既不是登录页面也不是注册的页面
